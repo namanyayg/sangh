@@ -8,9 +8,21 @@ const sequelize = new Sequelize({
   storage: './posts.sqlite'
 })
 
+const Post = sequelize.define('post', {
+  id: {
+    type: Sequelize.STRING,
+    notNull: true,
+    primaryKey: true
+  }
+}, {
+  timestamps: false
+})
+
+Post.sync()
+
 const transporter = nodemailer.createTransport({
   sendmail: true,
-  newline: unix,
+  newline: 'unix',
   path: '/usr/sbin/sendmail'
 })
 
@@ -33,8 +45,17 @@ const sendEmail = entry => {
   })
 }
 
-parser.parseURL(RSS_URL, (err, parsed) => {
-  parsed.feed.entries.forEach(entry => {
-    sendEmail(formatEntry(entry))
-  })
+parser.parseURL(RSS_URL, async (err, parsed) => {
+  let entries = parsed.feed.entries.splice(0, 3)
+
+  for (entry of entries) {
+    await Post.findOrCreate({
+      where: { id: entry.id }
+    }).spread((_, created) => {
+      if (created) {
+        // if a new entry had to be created, send an email
+        sendEmail(formatEntry(entry))
+      }
+    })
+  }
 })
