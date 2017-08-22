@@ -22,7 +22,7 @@ Post.sync()
 
 const transporter = nodemailer.createTransport({
   sendmail: true,
-  newline: 'unix',
+  newline: 'windows',
   path: '/usr/sbin/sendmail'
 })
 
