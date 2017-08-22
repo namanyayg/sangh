@@ -32,10 +32,10 @@ const TO_EMAIL = `namanyay.goel@gmail.com`
 const formatEntry = entry => ({
   to: TO_EMAIL,
   subject: `[W] ${ entry.title }`,
-  text: `${ entry.content }
+  html: `${ entry.content }
 
   <a href="${ entry.link }">Link to post</a>
-  <a href="${ entry.author.split('/')[2] }">User</a>
+  <a href="http://reddit.com${ entry.author }">User</a>
   <a href="https://www.reddit.com/message/compose?to=${ entry.author.split('/')[2] }&subject=&message=Hey%2C%0A%0A%5BNamanyay+Goel+%28portfolio%29%5D%28http%3A%2F%2Fnamanyayg.com%2F%29">Message Lead</a>`
 })
 
