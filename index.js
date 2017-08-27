@@ -26,17 +26,13 @@ const transporter = nodemailer.createTransport({
   path: '/usr/sbin/sendmail'
 })
 
-const RSS_URL = ``
-const TO_EMAIL = ``
+const RSS_URL = `https://www.reddit.com/r/programming/new/.rss?sort=new`
+const TO_EMAIL = `you@domain.com`
 
 const formatEntry = entry => ({
   to: TO_EMAIL,
-  subject: `[W] ${ entry.title }`,
-  html: `${ entry.content }
-
-  <a href="${ entry.link }">Link to post</a>
-  <a href="http://reddit.com${ entry.author }">User</a>
-  <a href="https://www.reddit.com/message/compose?to=${ entry.author.split('/')[2] }&subject=&message=Hey%2C%0A%0A%5BNamanyay+Goel+%28portfolio%29%5D%28http%3A%2F%2Fnamanyayg.com%2F%29">Message Lead</a>`
+  subject: `${ entry.title }`,
+  html: `${ entry.content }`
 })
 
 const sendEmail = entry => {
