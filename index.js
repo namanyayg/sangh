@@ -26,8 +26,8 @@ const transporter = nodemailer.createTransport({
   path: '/usr/sbin/sendmail'
 })
 
-const RSS_URL = `https://www.reddit.com/r/forhire+jobbit+DesignJobs/new/.rss?sort=new`
-const TO_EMAIL = `namanyay.goel@gmail.com`
+const RSS_URL = ``
+const TO_EMAIL = ``
 
 const formatEntry = entry => ({
   to: TO_EMAIL,
