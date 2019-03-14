@@ -21,9 +21,12 @@ const Post = sequelize.define('post', {
 
 Post.sync()
 
-const mailer = nodemailer.createTransport(sgTransport({
-  api_key: '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'
-}))
+const mailer = nodemailer.createTransport(
+  sgTransport({
+    apiKey:
+      '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'
+  })
+)
 
 const RSS_URL = `https://www.reddit.com/r/forhire+jobbit+DesignJobs/new/.rss?sort=new`
 const TO_EMAIL = `namanyay.goel@gmail.com`
