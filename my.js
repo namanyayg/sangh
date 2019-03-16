@@ -8,7 +8,8 @@ sgMail.setApiKey(process.env.SG_API)
 const sequelize = new Sequelize({
   host: 'localhost',
   dialect: 'sqlite',
-  storage: './posts.sqlite'
+  storage: './posts.sqlite',
+  logging: false
 })
 
 const Post = sequelize.define('post', {
@@ -50,6 +51,7 @@ parser.parseURL(RSS_URL, async (err, parsed) => {
       where: { id: entry.id }
     }).spread((_, created) => {
       if (created) {
+        console.log(`Sending ${entry.title}`)
         // if a new entry had to be created, send an email
         sendEmail(formatEntry(entry))
       }
